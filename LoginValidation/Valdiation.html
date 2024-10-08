@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validation</title>
+    <style>
+       body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-repeat: repeat;
+            background-position: right;
+            background-attachment: fixed;
+            
+        }
+
+        
+        .form-container {
+            background-color: rgb(252, 109, 228);
+            padding: 40px;
+            border: 1px solid #000000;
+            border-radius: 20px;
+            box-shadow: 0 20px 10px rgba(0, 0, 0, 0.1);
+            width: 340px;
+            text-align: center;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        input {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid black;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            background-color:rgb(0, 0, 0);
+            color: white;
+            cursor: pointer;
+        }
+
+        button[type="reset"] {
+            background-color: rgb(0, 0, 0);
+        }
+
+        button:hover {
+            background-color: black;
+        }
+
+        button[type="reset"]:hover {
+            background-color: black;
+        }
+
+        
+        p {
+            color: rgb(10, 9, 9);
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="form-container">
+        <h2>Login Validation </h2>
+        <form>
+            
+            <label for="user">Username:</label>
+            <input type="text" id="user" name="user" placeholder="Enter your Username" required>
+            <p>Username must be 1 upperase and should be 5-20 letters and numbers.</p>
+            <p id="message1"></p>
+            
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" placeholder="Enter your Password" required>
+            <p>Password must be 1 uppercase letter and 8 characters and have letters and numbers.</p>
+            <p id="message2"></p>
+            <div>
+                <button type="button" onclick="ValidationUserName(), ValidationPassWord()">Log in</button>
+                <button type="reset">Reset</button>
+            </div>
+        </form>
+        
+        
+    </div>
+    <script>
+        function ValidationUserName(){
+            let user = document.getElementById('user').value;
+            let regUser = /^[A-Z][a-zA-Z0-9]{5,20}$/; 
+
+            if (regUser.test(user)) {
+                document.getElementById("message1").innerHTML = "Valid Username";
+                
+            } else {
+                document.getElementById("message1").innerHTML = "Incorrect Username ";
+            }
+        }
+        
+        function ValidationPassWord(){
+            let pass = document.getElementById('password').value;
+            let regPass = /^[A-Z][a-zA-Z0-9]{5,20}$/; 
+            if (regPass.test(pass)) {
+                document.getElementById("message2").innerHTML = "Valid Password";
+            } else {
+                document.getElementById("message2").innerHTML = "Incorrect Password";
+            }
+        }
+        
+    </script>
+       
+</body>
+</html>
