@@ -1,0 +1,63 @@
+[
+    {
+        "name": "Nike Air Jordan",
+        "description": "Iconic basketball shoes known for their comfort, style, and association with Michael Jordan.",
+        "price": 200,
+        "image": "Nike_Air_Jordan.jpg"
+    },
+    {
+        "name": "Adidas Ultraboost",
+        "description": "Popular running shoes with excellent cushioning, sleek design, and a comfortable fit.",
+        "price": 180,
+        "image": "Adidas_Ultraboost.jpg"
+    },
+    {
+        "name": "Converse Chuck Taylor",
+        "description": "Classic sneakers with timeless style, durable construction, and versatile appeal.",
+        "price": 65,
+        "image": "Converse_Chuck_Taylor.jpg"
+    },
+    {
+        "name": "Vans Old Skool",
+        "description": "Skateboarding shoes with a durable build, padded collars, and the signature side stripe.",
+        "price": 60,
+        "image": "Vans_Old_Skool.jpg"
+    },
+    {
+        "name": "Puma RS-X",
+        "description": "Retro-inspired sneakers with bold colorways, lightweight design, and superior comfort.",
+        "price": 110,
+        "image": "Puma_RS_X.jpg"
+    },
+    {
+        "name": "New Balance 574",
+        "description": "Stylish and comfortable casual sneakers, perfect for everyday wear and long walks.",
+        "price": 85,
+        "image": "New_Balance_574.jpg"
+    },
+    {
+        "name": "Reebok Classic Leather",
+        "description": "Minimalist sneakers with a sleek leather design, offering comfort and classic styling.",
+        "price": 75,
+        "image": "Reebok_Classic_Leather.jpg"
+    },
+    {
+        "name": "ASICS Gel Kayano",
+        "description": "High-performance running shoes with excellent arch support and gel cushioning technology.",
+        "price": 160,
+        "image": "ASICS_Gel_Kayano.jpg"
+    },
+    {
+        "name": "Timberland Boots",
+        "description": "Durable waterproof boots with a rugged design, ideal for outdoor adventures.",
+        "price": 150,
+        "image": "Timberland_Boots.jpg"
+    },
+    {
+        "name": "Birkenstock Arizona",
+        "description": "Classic two-strap sandals with ergonomic design and premium materials for unmatched comfort.",
+        "price": 125,
+        "image": "Birkenstock_Arizona.jpg"
+    }
+  ]
+  
