@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tool Matching Game</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="game-container">
+        <header>
+            <h1>Tool Matching Game</h1>
+            <p>Drag the tools to match them with the correct professions!</p>
+        </header>
+
+        <section class="game-area">
+            <div class="draggable-section">
+                <h2>Tools</h2>
+                <div class="draggable-container">
+                    <!-- Tools will be dynamically loaded here -->
+                </div>
+            </div>
+
+            <div class="droppable-section">
+                <h2>Professions</h2>
+                <div class="droppable-container">
+                    <!-- Professions will be dynamically loaded here -->
+                </div>
+            </div>
+        </section>
+
+        <footer class="game-status">
+            <p>Remarks: <span id="remarks"></span></p>
+            <p>Score: <span id="score">0</span></p>
+            <button id="reset-button">Reset Game</button>
+        </footer>
+    </div>
+
+    <script>
+const toolsAndProfessions = [
+    { id: 'tool1', tool: 'Stethoscope', profession: 'Doctor' },
+    { id: 'tool2', tool: 'Paintbrush', profession: 'Artist' },
+    { id: 'tool3', tool: 'Hammer', profession: 'Carpenter' },
+    { id: 'tool4', tool: 'Wrench', profession: 'Mechanic' },
+    { id: 'tool5', tool: 'Laptop', profession: 'Software Engineer' },
+    { id: 'tool6', tool: 'Microscope', profession: 'Scientist' },
+    { id: 'tool7', tool: 'Knife', profession: 'Chef' },
+    { id: 'tool8', tool: 'Camera', profession: 'Photographer' },
+    { id: 'tool9', tool: 'Chalk', profession: 'Teacher' },
+    { id: 'tool10', tool: 'Scissors', profession: 'Tailor' },
+];
+
+const draggableContainer = document.querySelector('.draggable-container');
+const droppableContainer = document.querySelector('.droppable-container');
+const remarksElement = document.getElementById('remarks');
+const scoreElement = document.getElementById('score');
+const resetButton = document.getElementById('reset-button');
+let score = 0;
+
+function shuffle(array) {
+    return array.sort(() => Math.random() - 0.5);
+}
+
+function createGameElements() {
+    draggableContainer.innerHTML = '';
+    droppableContainer.innerHTML = '';
+
+    const shuffledTools = shuffle([...toolsAndProfessions]);
+
+    shuffledTools.forEach(item => {
+        const toolElement = document.createElement('div');
+        toolElement.className = 'draggable';
+        toolElement.setAttribute('draggable', 'true');
+        toolElement.setAttribute('id', item.id);
+        toolElement.textContent = item.tool;
+        draggableContainer.appendChild(toolElement);
+    });
+
+    const shuffledProfessions = shuffle([...toolsAndProfessions.map(item => item.profession)]);
+    shuffledProfessions.forEach(profession => {
+        const professionElement = document.createElement('div');
+        professionElement.className = 'droppable';
+        professionElement.setAttribute('data-profession', profession);
+        professionElement.textContent = profession;
+        droppableContainer.appendChild(professionElement);
+    });
+}
+
+function initializeDragAndDrop() {
+    const draggableElements = document.querySelectorAll('.draggable');
+    const droppableElements = document.querySelectorAll('.droppable');
+
+    draggableElements.forEach(element => {
+        element.addEventListener('dragstart', event => {
+            event.dataTransfer.setData('text', event.target.id);
+        });
+    });
+
+    droppableElements.forEach(element => {
+        element.addEventListener('dragover', event => {
+            event.preventDefault();
+        });
+
+        element.addEventListener('drop', event => {
+            const draggedId = event.dataTransfer.getData('text');
+            const draggedElement = document.getElementById(draggedId);
+            const correctProfession = toolsAndProfessions.find(item => item.id === draggedId).profession;
+
+            if (event.target.getAttribute('data-profession') === correctProfession) {
+                event.target.appendChild(draggedElement);
+                score++;
+                remarksElement.textContent = 'Correct! 🎉';
+                scoreElement.textContent = score;
+
+                if (score === toolsAndProfessions.length) {
+                    remarksElement.textContent = 'You won! 🎊';
+                }
+            } else {
+                remarksElement.textContent = 'Try again! ❌';
+            }
+        });
+    });
+}
+
+function resetGame() {
+    score = 0;
+    remarksElement.textContent = '';
+    scoreElement.textContent = score;
+    createGameElements();
+    initializeDragAndDrop();
+}
+
+resetButton.addEventListener('click', resetGame);
+resetGame();
+    </script>
+
+    <style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e8f6ff;
+    color: #222;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+div.game-container {
+    width: 90%;
+    max-width: 800px;
+    background: #fdfdfd;
+    border-radius: 10px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    padding: 25px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+header h1 {
+    font-size: 2rem;
+    color: #007acc;
+}
+
+header p {
+    font-size: 1.1rem;
+    color: #00509e;
+}
+
+section.game-area {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 25px;
+}
+
+.draggable-section, .droppable-section {
+    width: 45%;
+}
+
+.draggable-container, .droppable-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    border: 1px solid #007acc;
+    padding: 15px;
+    border-radius: 10px;
+    background: #e3f2fd;
+}
+
+.draggable {
+    background: #ffcccb;
+    border: 2px solid #e57373;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    cursor: grab;
+    font-size: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.droppable {
+    background: #bbdefb;
+    border: 2px solid #64b5f6;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    min-height: 60px;
+    flex: 1;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+footer.game-status {
+    text-align: center;
+    padding: 15px;
+    border-top: 1px solid #007acc;
+}
+
+footer p {
+    margin: 8px 0;
+}
+
+#reset-button {
+    background-color: #4caf50;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+#reset-button:hover {
+    background-color: #388e3c;
+}
+
+#remarks {
+    font-weight: bold;
+    color: #d32f2f;
+}
+    </style>
+</body>
+</html>
